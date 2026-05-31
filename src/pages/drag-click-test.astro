@@ -1,0 +1,86 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout title="Drag Click Test — High CPS Mouse Test | FastClickTest.com" description="Free drag click test online. Measure your drag clicking CPS — drag your finger across the button to register multiple clicks. No signup needed." currentPage="drag">
+  <section class="page-hero">
+    <h1>Drag <span class="hi">Click Test</span></h1>
+    <p>Drag clicking registers multiple clicks by dragging your finger across the mouse button. Test your drag clicking speed.</p>
+  </section>
+  <div class="mode-selector">
+    <button class="mode-btn active" data-mode="5">5 Seconds</button>
+    <button class="mode-btn" data-mode="1">1 Second</button>
+    <button class="mode-btn" data-mode="10">10 Seconds</button>
+    <button class="mode-btn" data-mode="15">15 Seconds</button>
+    <button class="mode-btn" data-mode="30">30 Seconds</button>
+  </div>
+  <div class="stats-row">
+    <div class="stat"><div class="stat-val" id="cps-display">0.00</div><div class="stat-lbl">CPS</div></div>
+    <div class="stat"><div class="stat-val" id="click-count">0</div><div class="stat-lbl">Clicks</div></div>
+    <div class="stat"><div class="stat-val" id="timer-display">5.0</div><div class="stat-lbl">Seconds</div></div>
+    <div class="stat"><div class="stat-val" id="best-score">--</div><div class="stat-lbl">Best CPS</div></div>
+  </div>
+  <div id="click-area" class="idle">
+    <div class="ca-idle" id="ca-idle">
+      <div class="ca-cursor">🖱️</div>
+      <div class="ca-text">CLICK TO START</div>
+    </div>
+    <div class="ca-running" id="ca-running">
+      <div class="ca-big-num" id="ca-num">0</div>
+      <div class="ca-sub">clicks</div>
+    </div>
+  </div>
+  </div>
+  <p id="status-text">Click the box to begin!</p>
+  <div class="graph-wrap"><div style=""><div class="graph-header">📊 Live CPS Graph</div><canvas id="click-graph"></canvas></div></div>
+  <div class="history-section"><div class="section-label">🏆 Recent Scores</div><div id="scores-list"><p class="history-empty">No scores yet!</p></div></div>
+  <div id="result-overlay">
+    <div class="result-card">
+      <div id="new-best-badge" class="hidden">🎉 NEW PERSONAL BEST!</div>
+      <div class="result-cps" id="result-cps">0.00</div><div class="result-cps-label">Clicks Per Second</div>
+      <div class="result-rating" id="result-rating">⚡ Fast</div><div class="result-desc" id="result-desc">Great job!</div>
+      <div class="result-grid">
+        <div class="result-cell"><div class="result-cell-val" id="result-clicks">0</div><div class="result-cell-lbl">Total Clicks</div></div>
+        <div class="result-cell"><div class="result-cell-val" id="result-time">0s</div><div class="result-cell-lbl">Time</div></div>
+        <div class="result-cell"><div class="result-cell-val" id="result-best">--</div><div class="result-cell-lbl">Best CPS</div></div>
+      </div>
+      <div class="result-actions"><button class="btn btn-primary" id="try-again-btn">Try Again</button><button class="btn btn-secondary" id="share-btn">📤 Share</button></div>
+    </div>
+  </div>
+  <hr class="seo-divider" style="max-width:700px;margin:0 auto 32px;" />
+  <section class="seo-content">
+    <h2>What is Drag Clicking?</h2>
+    <p>Drag clicking is a technique where you drag your finger across the mouse button in a specific way that causes the button to register multiple clicks per motion. Skilled drag clickers can achieve 25–40+ CPS, though it requires a mouse with the right surface texture and actuation properties. Popular gaming mice for drag clicking include models from Glorious and Roccat.</p>
+    <h3>Is Drag Clicking Allowed?</h3>
+    <p>Drag clicking is banned on most major Minecraft servers including Hypixel, as it can be considered macro-like behavior. However, testing drag clicking as a skill is a legitimate way to understand your hardware capabilities. Always check server rules before using this technique in competitive play.</p>
+  </section>
+</div>
+</Layout>
+<script>
+const STORAGE_KEY='fct_drag_v1';
+const RATINGS=[{min:0,max:2,label:'Turtle',emoji:'🐢',color:'#ef4444',desc:"Keep practicing!"},{min:2,max:4,label:'Slow',emoji:'🐌',color:'#f97316',desc:'Not bad!'},{min:4,max:6,label:'Average',emoji:'✌️',color:'#eab308',desc:'Solid!'},{min:6,max:8,label:'Fast',emoji:'⚡',color:'#22c55e',desc:'Quick!'},{min:8,max:10,label:'Insane',emoji:'🔥',color:'#3b82f6',desc:'Impressive!'},{min:10,max:14,label:'Godlike',emoji:'🚀',color:'#a855f7',desc:'Elite!'},{min:14,max:999,label:'World Class',emoji:'👑',color:'#f59e0b',desc:'Legendary!'}];
+function getRating(cps){return RATINGS.find(r=>cps>=r.min&&cps<r.max)||RATINGS[RATINGS.length-1];}
+let state={clicks:0,isRunning:false,timeLimit:5,startTime:null,elapsed:0,timer:null,history:[],scores:[],bestCPS:0};
+const clickArea=document.getElementById('click-area'),cpsDisplay=document.getElementById('cps-display'),clickCountEl=document.getElementById('click-count'),timerDisplay=document.getElementById('timer-display'),statusText=document.getElementById('status-text'),bestScoreEl=document.getElementById('best-score'),overlayCount=document.getElementById('overlay-count'),scoresList=document.getElementById('scores-list'),resultOverlay=document.getElementById('result-overlay');
+const canvas=document.getElementById('click-graph');let ctx=null;
+function initCanvas(){if(!canvas)return;const dpr=window.devicePixelRatio||1,rect=canvas.parentElement.getBoundingClientRect();canvas.width=rect.width*dpr;canvas.height=80*dpr;canvas.style.width=rect.width+'px';canvas.style.height='80px';ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);}
+initCanvas();window.addEventListener('resize',initCanvas);
+function drawGraph(){if(!ctx||state.history.length<2)return;const W=canvas.offsetWidth,H=canvas.offsetHeight;ctx.clearRect(0,0,W,H);const maxCPS=Math.max(...state.history.map(p=>p.cps),6);ctx.strokeStyle='rgba(255,255,255,0.06)';ctx.lineWidth=1;for(let i=1;i<4;i++){const y=(i/4)*H;ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}const pts=state.history.map(p=>({x:(p.t/state.timeLimit)*W,y:H-(p.cps/maxCPS)*H*0.85}));ctx.beginPath();ctx.strokeStyle='#00ff87';ctx.lineWidth=2;ctx.lineJoin='round';ctx.lineCap='round';pts.forEach((p,i)=>i===0?ctx.moveTo(p.x,p.y):ctx.lineTo(p.x,p.y));ctx.stroke();ctx.lineTo(pts[pts.length-1].x,H);ctx.lineTo(0,H);ctx.closePath();ctx.fillStyle='rgba(0,255,135,0.08)';ctx.fill();}
+function clearGraph(){if(ctx)ctx.clearRect(0,0,canvas.offsetWidth,canvas.offsetHeight);}
+function loadScores(){try{const raw=localStorage.getItem(STORAGE_KEY);state.scores=raw?JSON.parse(raw):[];state.bestCPS=state.scores.length?Math.max(...state.scores.map(s=>s.cps)):0;}catch(e){state.scores=[];}}
+function saveScore(cps,clicks,elapsed){state.scores.unshift({cps:parseFloat(cps.toFixed(2)),clicks,elapsed:parseFloat(elapsed.toFixed(2)),mode:state.timeLimit+'s',date:new Date().toLocaleDateString()});state.scores=state.scores.slice(0,20);localStorage.setItem(STORAGE_KEY,JSON.stringify(state.scores));if(cps>state.bestCPS)state.bestCPS=cps;}
+function renderScores(){if(!scoresList)return;if(!state.scores.length){scoresList.innerHTML='<p class="history-empty">No scores yet!</p>';return;}scoresList.innerHTML=state.scores.slice(0,8).map((s,i)=>'<div class="history-row"><span style="color:var(--muted);font-size:0.8rem;">#'+(i+1)+'</span><span class="history-cps">'+s.cps+' CPS</span><span class="history-meta">'+s.clicks+' clicks · '+s.mode+'</span><span class="history-meta">'+s.date+'</span></div>').join('');}
+function updateBestDisplay(){if(bestScoreEl)bestScoreEl.textContent=state.bestCPS>0?state.bestCPS.toFixed(2):'--';}
+function createRipple(e){if(!clickArea)return;const rect=clickArea.getBoundingClientRect(),x=(e?.clientX??rect.left+rect.width/2)-rect.left,y=(e?.clientY??rect.top+rect.height/2)-rect.top,r=document.createElement('div');r.className='ripple-effect';r.style.left=x+'px';r.style.top=y+'px';clickArea.appendChild(r);setTimeout(()=>r.remove(),500);}
+function handleClick(e){if(!state.isRunning)startTest();state.clicks++;if(clickCountEl)clickCountEl.textContent=state.clicks;if(overlayCount)overlayCount.textContent=state.clicks;createRipple(e);}
+function startTest(){state.isRunning=true;state.startTime=Date.now();state.clicks=0;state.history=[];clickArea?.classList.add('active');if(statusText)statusText.textContent='GO!';if(overlayCount){overlayCount.style.opacity='1';overlayCount.textContent='0';}clearGraph();state.timer=setInterval(()=>{const elapsed=(Date.now()-state.startTime)/1000;state.elapsed=elapsed;const rem=Math.max(0,state.timeLimit-elapsed);if(timerDisplay)timerDisplay.textContent=rem.toFixed(1);if(elapsed>=state.timeLimit){endTest();return;}const cps=elapsed>0?state.clicks/elapsed:0;if(cpsDisplay)cpsDisplay.textContent=cps.toFixed(2);state.history.push({t:elapsed,cps});drawGraph();},50);}
+function endTest(){clearInterval(state.timer);state.isRunning=false;clickArea?.classList.remove('active');const elapsed=state.elapsed||0.01,cps=state.clicks/elapsed,rating=getRating(cps),wasNewBest=cps>state.bestCPS;saveScore(cps,state.clicks,elapsed);renderScores();updateBestDisplay();document.getElementById('result-cps').textContent=cps.toFixed(2);document.getElementById('result-clicks').textContent=state.clicks;document.getElementById('result-time').textContent=elapsed.toFixed(2)+'s';document.getElementById('result-best').textContent=state.bestCPS.toFixed(2);const rEl=document.getElementById('result-rating');rEl.textContent=rating.emoji+' '+rating.label;rEl.style.color=rating.color;document.getElementById('result-desc').textContent=rating.desc;document.getElementById('new-best-badge').classList.toggle('hidden',!wasNewBest);if(resultOverlay){resultOverlay.style.display='flex';resultOverlay.classList.add('visible');}}
+function reset(){clearInterval(state.timer);state.isRunning=false;state.clicks=0;state.history=[];state.elapsed=0;clickArea?.classList.remove('active');if(cpsDisplay)cpsDisplay.textContent='0.00';if(clickCountEl)clickCountEl.textContent='0';if(overlayCount){overlayCount.style.opacity='0';overlayCount.textContent='0';}if(timerDisplay)timerDisplay.textContent=state.timeLimit.toFixed(1);if(statusText)statusText.textContent='Click the box to begin!';clearGraph();updateBestDisplay();}
+document.querySelectorAll('.mode-btn').forEach(btn=>{btn.addEventListener('click',()=>{if(state.isRunning)return;document.querySelectorAll('.mode-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');state.timeLimit=parseInt(btn.dataset.mode);reset();});});
+clickArea?.addEventListener('click',handleClick);
+clickArea?.addEventListener('touchstart',(e)=>{e.preventDefault();handleClick(e);},{passive:false});
+clickArea?.addEventListener('contextmenu',(e)=>{e.preventDefault();handleClick(e);});
+document.getElementById('try-again-btn')?.addEventListener('click',()=>{if(resultOverlay){resultOverlay.style.display='none';resultOverlay.classList.remove('visible');}reset();});
+document.getElementById('share-btn')?.addEventListener('click',()=>{const cps=document.getElementById('result-cps')?.textContent;navigator.share?navigator.share({title:'CPS Score',text:'I scored '+cps+' CPS at FastClickTest.com!',url:window.location.href}):navigator.clipboard.writeText('I scored '+cps+' CPS at FastClickTest.com!');});
+resultOverlay?.addEventListener('click',(e)=>{if(e.target===resultOverlay){resultOverlay.style.display='none';resultOverlay.classList.remove('visible');reset();}});
+loadScores();updateBestDisplay();renderScores();
+</script>

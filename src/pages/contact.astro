@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="Contact Us | FastClickTest.com"
+  description="Contact the FastClickTest team. Report bugs, suggest new features, or ask questions about our free click speed test. We read every message."
+  currentPage="contact"
+>
+<div class="page">
+
+  <div class="page-hero">
+    <h1>Contact <span class="hi">Us</span></h1>
+    <p>Found a bug? Have a suggestion? We read every message and reply within 24–48 hours.</p>
+  </div>
+
+  <div style="max-width:520px;margin:0 auto 48px;">
+
+    <!-- Contact Info Cards -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px;">
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;">
+        <div style="font-size:1.5rem;margin-bottom:8px;">🐛</div>
+        <div style="font-family:var(--font-game);font-size:0.75rem;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Bug Report</div>
+        <div style="font-size:0.8rem;color:var(--text-2);line-height:1.5;">Something not working? Tell us what browser and device you're using.</div>
+      </div>
+      <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px;text-align:center;">
+        <div style="font-size:1.5rem;margin-bottom:8px;">💡</div>
+        <div style="font-family:var(--font-game);font-size:0.75rem;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Feature Request</div>
+        <div style="font-size:0.8rem;color:var(--text-2);line-height:1.5;">Have an idea for a new test mode or feature? We'd love to hear it.</div>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:28px;">
+      <div style="font-family:var(--font-game);font-size:0.8rem;font-weight:700;color:var(--text);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:20px;">Send a Message</div>
+
+      <form id="contact-form" style="display:flex;flex-direction:column;gap:14px;">
+
+        <div>
+          <label class="form-label">Your Name</label>
+          <input type="text" name="name" required placeholder="John Doe" class="form-input" />
+        </div>
+
+        <div>
+          <label class="form-label">Email Address</label>
+          <input type="email" name="email" required placeholder="you@example.com" class="form-input" />
+        </div>
+
+        <div>
+          <label class="form-label">Subject</label>
+          <select name="subject" class="form-input">
+            <option value="bug">Bug Report</option>
+            <option value="feature">Feature Request</option>
+            <option value="general">General Question</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="form-label">Message</label>
+          <textarea name="message" required rows="5" placeholder="Describe your bug, suggestion, or question in detail..." class="form-input" style="resize:vertical;font-family:var(--font-body);"></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width:100%;margin-top:4px;">
+          Send Message ✉️
+        </button>
+
+        <div id="form-success" style="display:none;text-align:center;padding:12px;border-radius:8px;background:rgba(0,229,255,0.08);border:1px solid rgba(0,229,255,0.2);color:var(--cyan);font-size:0.85rem;font-family:var(--font-game);">
+          ✅ Message sent! We'll get back to you within 24–48 hours.
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+  <div class="seo-content" style="margin-top:0;">
+    <h2>Frequently Asked — Before You Write</h2>
+    <p>
+      Check our <a href="/faq">FAQ page</a> first — it answers the most common questions about
+      CPS scores, clicking techniques, score accuracy, and test modes. If you don't find your
+      answer there, send us a message above.
+    </p>
+    <h3>Response Time</h3>
+    <p>
+      We typically respond within 24–48 hours on weekdays. For urgent bugs that affect the test
+      accuracy, please describe your device, browser, and operating system in your message — this
+      helps us reproduce and fix the issue much faster.
+    </p>
+  </div>
+
+</div>
+</Layout>
+
+<style>
+  .form-label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-2);
+    font-family: var(--font-game);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .form-input {
+    width: 100%;
+    background: var(--surface-2);
+    border: 1px solid var(--border-2);
+    border-radius: 8px;
+    padding: 11px 14px;
+    color: var(--text);
+    font-size: 0.88rem;
+    outline: none;
+    transition: border-color 0.2s;
+    font-family: var(--font-body);
+  }
+  .form-input:focus { border-color: var(--cyan); }
+  .form-input option { background: var(--surface); }
+</style>
+
+<script>
+  document.getElementById('contact-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const success = document.getElementById('form-success');
+    const btn = e.target.querySelector('button[type="submit"]');
+    if (success) success.style.display = 'block';
+    if (btn) { btn.textContent = '✅ Sent!'; btn.disabled = true; }
+    (e.target as HTMLFormElement).reset();
+  });
+</script>

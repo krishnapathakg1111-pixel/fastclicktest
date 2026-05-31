@@ -1,0 +1,60 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="FAQ — Click Speed Test Questions Answered | FastClickTest.com"
+  description="Frequently asked questions about click speed tests, CPS scores, Kohi test, jitter clicking, butterfly clicking, and improving your clicks per second."
+  currentPage="faq"
+>
+  <section class="page-hero">
+    <h1>Frequently Asked <em style="color:var(--accent)">Questions</em></h1>
+    <p>Everything you need to know about click speed tests, CPS scores, and clicking techniques.</p>
+  </section>
+
+  <section class="faq-section" style="max-width:700px;margin:0 auto 48px;">
+    {[
+      { q: "What is a CPS test?", a: "A CPS test (Clicks Per Second test) measures how many times you can click your mouse within a given time frame. It's used by gamers to benchmark their clicking speed, particularly for competitive games like Minecraft PvP where fast clicking gives an advantage." },
+      { q: "What is a good CPS score?", a: "The average person clicks at 5–7 CPS during a 5-second test. A score of 6–8 CPS is considered 'Fast'. Competitive Minecraft players aim for 8–12 CPS, while advanced techniques like jitter clicking or butterfly clicking can push to 14+ CPS." },
+      { q: "How do I improve my clicks per second?", a: "Practice regularly using different time modes. Try clicking techniques: jitter clicking (tensing forearm muscles), butterfly clicking (two-finger alternation), or drag clicking (dragging across the button). Use a gaming mouse with light actuation force. Practice 10–15 minutes daily." },
+      { q: "What is the world record for clicks per second?", a: "The verified world record is held by Dylan Allred, who clicked 1,051 times in 10 seconds — averaging 14.1 CPS. This was achieved using butterfly clicking technique with a specialized gaming mouse." },
+      { q: "What is the Kohi click test?", a: "The Kohi click test originated from a popular Minecraft PvP server called Kohi (now BadLion). Players used the test to measure their CPS before entering competitive matches. It's functionally identical to a standard CPS test but carries cultural significance in the Minecraft community." },
+      { q: "What is jitter clicking?", a: "Jitter clicking is a technique where you tense your forearm and wrist muscles to create rapid vibrations that register as clicks. Skilled jitter clickers achieve 12–16 CPS. However, it can cause repetitive strain injury if done excessively — always take breaks." },
+      { q: "What is butterfly clicking?", a: "Butterfly clicking uses two fingers (index and middle) alternating on a single mouse button. This can achieve 15–25 CPS. It's less physically demanding than jitter clicking but is banned on some competitive servers as it can be classified as an unfair advantage." },
+      { q: "What is drag clicking?", a: "Drag clicking is a technique where dragging your finger across the mouse button registers multiple clicks per motion. Skilled drag clickers achieve 25–40+ CPS. It requires a mouse with specific surface texture properties. Most competitive servers ban drag clicking." },
+      { q: "Does CPS matter in Minecraft?", a: "Yes, especially in classic 1.8 PvP where there's no attack cooldown. Higher CPS means more hits per second and more damage. On modern servers like Hypixel, hit registration is capped around 13 CPS, so exceeding that offers diminishing returns — but consistency is always valuable." },
+      { q: "Is FastClickTest free?", a: "Yes, completely. No account required, no downloads, no hidden fees. All test modes — including the unique 100-click challenge — are free forever. Your scores are saved locally in your browser." },
+      { q: "How accurate is the click speed test?", a: "Very accurate. FastClickTest captures every mousedown event and updates results every 50 milliseconds using the browser's Performance API. Results are as precise as your browser and hardware allow." },
+      { q: "What is the 100-click challenge?", a: "Instead of counting clicks in a fixed time, the 100-click challenge records how long it takes you to reach exactly 100 clicks. This measures both speed and consistency. Your time is shown in seconds, and you can divide 100 by that time to calculate your average CPS." },
+      { q: "Can I do the test on mobile?", a: "Yes! FastClickTest is fully mobile-responsive. On mobile, tap the click area as fast as possible — touch events are handled the same as mouse clicks. Note that mobile touchscreens have a natural speed limit compared to mouse clicks." },
+      { q: "Why is my score different each test?", a: "Clicking speed varies naturally based on fatigue, focus, and warm-up state. Take 2–3 warm-up tests, then go for your best score. Consistency over multiple tests is a better indicator of your true clicking speed than any single result." },
+    ].map(item => (
+      <div class="faq-item">
+        <div class="faq-q"><span>{item.q}</span><span class="faq-icon">▾</span></div>
+        <div class="faq-a">{item.a}</div>
+      </div>
+    ))}
+  </section>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question","name": "What is a CPS test?","acceptedAnswer": {"@type": "Answer","text": "A CPS test (Clicks Per Second test) measures how many times you can click your mouse within a given time frame. It is used by gamers to benchmark their clicking speed, particularly for competitive games like Minecraft PvP."}},
+      {"@type": "Question","name": "What is a good CPS score?","acceptedAnswer": {"@type": "Answer","text": "The average person clicks at 5-7 CPS. A score of 6-8 CPS is considered Fast. Competitive Minecraft players aim for 8-12 CPS, while advanced techniques can achieve 14+ CPS."}},
+      {"@type": "Question","name": "What is the world record for clicks per second?","acceptedAnswer": {"@type": "Answer","text": "Dylan Allred holds the verified world record, clicking 1,051 times in 10 seconds — averaging 14.1 CPS using butterfly clicking technique."}},
+      {"@type": "Question","name": "What is the Kohi click test?","acceptedAnswer": {"@type": "Answer","text": "The Kohi click test originated from the Minecraft PvP server Kohi (now BadLion). It is a standard CPS test that became a cultural benchmark in the Minecraft competitive community."}},
+      {"@type": "Question","name": "What is jitter clicking?","acceptedAnswer": {"@type": "Answer","text": "Jitter clicking involves tensing forearm muscles to create rapid vibrations that register as mouse clicks, achieving 12-16 CPS. It can cause repetitive strain if done excessively."}},
+      {"@type": "Question","name": "What is butterfly clicking?","acceptedAnswer": {"@type": "Answer","text": "Butterfly clicking uses two fingers alternating on a single mouse button to achieve 15-25 CPS. It is less physically demanding than jitter clicking but banned on some competitive servers."}},
+      {"@type": "Question","name": "Is FastClickTest free?","acceptedAnswer": {"@type": "Answer","text": "Yes, completely free. No account required, no downloads. All test modes including the 100-click challenge are free forever with scores saved locally in your browser."}}
+    ]
+  }
+  </script>
+</Layout>
+
+<script>
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-q')?.addEventListener('click', () => item.classList.toggle('open'));
+  });
+</script>

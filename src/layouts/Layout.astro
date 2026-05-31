@@ -1,0 +1,171 @@
+---
+import '../styles/global.css';
+interface Props {
+  title: string; description: string;
+  canonical?: string; currentPage?: string;
+}
+const { title, description, canonical = Astro.url.pathname, currentPage = '' } = Astro.props;
+const siteUrl = 'https://fastclicktest.com';
+const fullUrl = siteUrl + canonical;
+
+const toolNav = [
+  { href:'/',                     label:'CPS Test',    key:'home' },
+  { href:'/kohi-click-test',      label:'Kohi',        key:'kohi' },
+  { href:'/jitter-click-test',    label:'Jitter',      key:'jitter' },
+  { href:'/butterfly-click-test', label:'Butterfly',   key:'butterfly' },
+  { href:'/drag-click-test',      label:'Drag',        key:'drag' },
+  { href:'/right-click-test',     label:'Right Click', key:'rightclick' },
+  { href:'/spacebar-test',        label:'Spacebar',    key:'space' },
+  { href:'/reaction-time-test',   label:'Reaction',    key:'reaction' },
+  { href:'/faq',                  label:'FAQ',         key:'faq' },
+];
+
+const legalNav = [
+  { href:'/about',          label:'About',   key:'about' },
+  { href:'/contact',        label:'Contact', key:'contact' },
+  { href:'/privacy-policy', label:'Privacy', key:'privacy' },
+  { href:'/terms',          label:'Terms',   key:'terms' },
+];
+---
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={fullUrl} />
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url"         content={fullUrl} />
+  <meta property="og:site_name"   content="FastClickTest" />
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="robots" content="index, follow" />
+
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="shortcut icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+
+  <!-- ═══════════════════════════════════════════════════
+       GOOGLE ANALYTICS — PASTE YOUR GA4 CODE HERE
+       1. Go to analytics.google.com
+       2. Create property → get your G-XXXXXXXX tag
+       3. Replace the two lines below with your real tag
+       ═══════════════════════════════════════════════════ -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script> -->
+  <!-- END GOOGLE ANALYTICS -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@600;700;800;900&family=DM+Mono:wght@400;500&family=Mulish:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── Header ── -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <span class="c1">Fast</span><span class="c2">Click</span>Test
+      </a>
+
+      <button class="icon-btn menu-toggle" id="menu-toggle" aria-label="Menu">☰</button>
+
+      <nav class="nav" id="main-nav">
+        {toolNav.map(n => (
+          <a href={n.href} class={currentPage === n.key ? 'active' : ''}>{n.label}</a>
+        ))}
+        <span class="nav-divider"></span>
+        {legalNav.map(n => (
+          <a href={n.href} class={`nav-legal ${currentPage === n.key ? 'active' : ''}`}>{n.label}</a>
+        ))}
+      </nav>
+
+      <button class="icon-btn" id="theme-btn" aria-label="Toggle theme">☀️</button>
+    </div>
+  </header>
+
+  <!-- ── Main ── -->
+  <main><slot /></main>
+
+  <!-- ── Footer ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        <span class="footer-logo"><span class="c1">Fast</span><span class="c2">Click</span>Test</span>
+        <p class="footer-tagline">Free online click speed tests — CPS, Kohi, Jitter, Butterfly & more.</p>
+      </div>
+
+      <div class="footer-cols">
+        <div class="footer-col">
+          <div class="footer-col-title">Tools</div>
+          <a href="/">CPS Test</a>
+          <a href="/kohi-click-test">Kohi Click Test</a>
+          <a href="/jitter-click-test">Jitter Click Test</a>
+          <a href="/butterfly-click-test">Butterfly Click Test</a>
+          <a href="/drag-click-test">Drag Click Test</a>
+          <a href="/right-click-test">Right Click Test</a>
+          <a href="/spacebar-test">Spacebar Test</a>
+          <a href="/reaction-time-test">Reaction Time Test</a>
+        </div>
+        <div class="footer-col">
+          <div class="footer-col-title">Support</div>
+          <a href="/faq">FAQ</a>
+          <a href="/about">About Us</a>
+          <a href="/contact">Contact Us</a>
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms">Terms &amp; Conditions</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; {new Date().getFullYear()} FastClickTest.com — Free Online Click Speed Test</p>
+        <div class="footer-bottom-links">
+          <a href="/privacy-policy">Privacy</a>
+          <a href="/terms">Terms</a>
+          <a href="/contact">Contact</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+<script>
+  const html = document.documentElement;
+  const saved = localStorage.getItem('fct-theme');
+  if (saved === 'light') html.classList.replace('dark','light');
+  const btn = document.getElementById('theme-btn');
+  if (btn) {
+    btn.textContent = html.classList.contains('light') ? '🌙' : '☀️';
+    btn.addEventListener('click', () => {
+      const isLight = html.classList.contains('light');
+      html.classList.replace(isLight ? 'light' : 'dark', isLight ? 'dark' : 'light');
+      localStorage.setItem('fct-theme', isLight ? 'dark' : 'light');
+      btn.textContent = isLight ? '☀️' : '🌙';
+    });
+  }
+  const menuBtn = document.getElementById('menu-toggle');
+  const nav = document.getElementById('main-nav');
+  if (menuBtn && nav) {
+    menuBtn.addEventListener('click', () => {
+      nav.classList.toggle('open');
+      menuBtn.textContent = nav.classList.contains('open') ? '✕' : '☰';
+    });
+    nav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      nav.classList.remove('open'); menuBtn.textContent = '☰';
+    }));
+  }
+</script>
+</html>

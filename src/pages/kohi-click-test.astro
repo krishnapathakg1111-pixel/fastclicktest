@@ -1,0 +1,303 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Kohi Click Test — CPS Test for Minecraft PvP | FastClickTest.com"
+  description="Take the Kohi click test — the original Minecraft PvP CPS test. Measure your clicks per second and see if you're ready for competitive Minecraft combat."
+  currentPage="kohi"
+>
+<div class="page">
+  <section class="page-hero">
+    <h1>Kohi <span class="hi">Click Test</span></h1>
+    <p>The original Minecraft PvP click speed test. Measure your CPS and see if you're ready for competitive combat.</p>
+  </section>
+
+  <div class="mode-selector">
+    <button class="mode-btn active" data-mode="5">5 Seconds</button>
+    <button class="mode-btn" data-mode="1">1 Second</button>
+    <button class="mode-btn" data-mode="10">10 Seconds</button>
+    <button class="mode-btn" data-mode="15">15 Seconds</button>
+    <button class="mode-btn" data-mode="30">30 Seconds</button>
+    <button class="mode-btn" data-mode="60">60 Seconds</button>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat">
+      <div class="stat-val" id="cps-display">0.00</div>
+      <div class="stat-lbl">CPS</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="click-count">0</div>
+      <div class="stat-lbl">Clicks</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="timer-display">5.0</div>
+      <div class="stat-lbl" id="timer-label">Seconds</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="best-score">--</div>
+      <div class="stat-lbl">Best CPS</div>
+    </div>
+  </div>
+
+  <div id="click-area" class="idle">
+    <div class="ca-idle" id="ca-idle">
+      <div class="ca-cursor">🖱️</div>
+      <div class="ca-text">CLICK TO START KOHI TEST</div>
+    </div>
+    <div class="ca-running" id="ca-running">
+      <div class="ca-big-num" id="ca-num">0</div>
+      <div class="ca-sub">clicks</div>
+    </div>
+  </div>
+  </div>
+
+  <p id="status-text">Click the box to begin your Kohi CPS test!</p>
+
+  <div class="graph-wrap">
+    <div style="">
+      <div class="graph-header">📊 Live CPS Graph</div>
+      <canvas id="click-graph"></canvas>
+    </div>
+  </div>
+
+  <div class="history-section">
+    <div class="section-label">🏆 Recent Scores</div>
+    <div id="scores-list"><p class="history-empty">No scores yet!</p></div>
+  </div>
+
+  <div id="result-overlay">
+    <div class="result-card">
+      <div id="new-best-badge" class="hidden">🎉 NEW PERSONAL BEST!</div>
+      <div class="result-cps" id="result-cps">0.00</div>
+      <div class="result-cps-label">Clicks Per Second</div>
+      <div class="result-rating" id="result-rating">⚡ Fast</div>
+      <div class="result-desc" id="result-desc">Great job!</div>
+      <div class="result-grid">
+        <div class="result-cell">
+          <div class="result-cell-val" id="result-clicks">0</div>
+          <div class="result-cell-lbl">Total Clicks</div>
+        </div>
+        <div class="result-cell">
+          <div class="result-cell-val" id="result-time">0s</div>
+          <div class="result-cell-lbl">Time</div>
+        </div>
+        <div class="result-cell">
+          <div class="result-cell-val" id="result-best">--</div>
+          <div class="result-cell-lbl">Best CPS</div>
+        </div>
+      </div>
+      <div class="result-actions">
+        <button class="btn btn-primary" id="try-again-btn">Try Again</button>
+        <button class="btn btn-secondary" id="share-btn">📤 Share</button>
+      </div>
+    </div>
+  </div>
+
+  <hr class="seo-divider" style="max-width:700px;margin:0 auto 32px;" />
+  <section class="seo-content">
+    <h2>Kohi Click Test — The Minecraft PvP Standard</h2>
+    <p>
+      The <strong>Kohi click test</strong> was born on one of Minecraft's most competitive PvP servers — Kohi. In the
+      era of pre-1.9 Minecraft combat, clicking speed was everything. Players who could click faster had more hits per
+      second, and more hits meant more damage in duels. Kohi's built-in CPS test became the gold standard for measuring
+      readiness before PvP matches.
+    </p>
+    <h3>Why Kohi Matters for Minecraft PvP</h3>
+    <p>
+      In classic Minecraft combat (also called "1.8 PvP"), there is no cooldown between attacks — every click counts.
+      A player clicking at 10 CPS deals roughly 67% more damage per second than one clicking at 6 CPS, assuming equal
+      accuracy. This is why the Kohi click test became so important: it gave players an objective benchmark to improve
+      against before entering competitive matches.
+    </p>
+    <h3>Target CPS for Kohi / Minecraft PvP</h3>
+    <p>
+      For general Minecraft PvP, you want to consistently hit <strong>7–10 CPS</strong>. Advanced players using jitter
+      or butterfly click techniques can reach <strong>12–16 CPS</strong>. On servers like Hypixel that cap hit
+      registration around 13 CPS, there's little benefit going higher — but consistency matters more than raw speed.
+    </p>
+  </section>
+
+  <section class="faq-section">
+    <div class="section-label">Kohi Click Test — FAQ</div>
+    <div class="faq-item">
+      <div class="faq-q"><span>What was Kohi in Minecraft?</span><span class="faq-icon">▾</span></div>
+      <div class="faq-a">Kohi was a Minecraft network famous for its 1.8 PvP modes. It merged with BadLion Network in 2014. The click speed test associated with Kohi became a standard benchmark in the Minecraft PvP community.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>What is a good Kohi click test score?</span><span class="faq-icon">▾</span></div>
+      <div class="faq-a">For competitive Minecraft PvP, 8–10 CPS is considered good. Players using jitter clicking can hit 12–16 CPS. Consistency over a 10-second test is more valuable than a peak 1-second burst.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q"><span>Is the Kohi click test different from a regular CPS test?</span><span class="faq-icon">▾</span></div>
+      <div class="faq-a">Functionally, no. The Kohi click test is a standard CPS test. The difference is cultural — it became the standard benchmark in the Minecraft community and carries significance for PvP players.</div>
+    </div>
+  </section>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {"@type": "Question","name": "What was Kohi in Minecraft?","acceptedAnswer": {"@type": "Answer","text": "Kohi was a Minecraft network famous for 1.8 PvP modes. It merged with BadLion Network in 2014. The associated click speed test became a standard benchmark in the Minecraft PvP community."}},
+      {"@type": "Question","name": "What is a good Kohi click test score?","acceptedAnswer": {"@type": "Answer","text": "For competitive Minecraft PvP, 8-10 CPS is good. Players using jitter or butterfly clicking can reach 12-16 CPS."}},
+      {"@type": "Question","name": "Is the Kohi click test different from a regular CPS test?","acceptedAnswer": {"@type": "Answer","text": "Functionally no — it is a standard CPS test. The difference is cultural significance within the Minecraft PvP community."}}
+    ]
+  }
+  </script>
+</div>
+</Layout>
+
+<script>
+  // Reuse same engine — imported inline for each page
+  const STORAGE_KEY = 'fct_kohi_v1';
+  const RATINGS = [
+    { min: 0,  max: 2,   label: 'Turtle',      emoji: '🐢', color: '#ef4444', desc: "You're just getting started!" },
+    { min: 2,  max: 4,   label: 'Slow',        emoji: '🐌', color: '#f97316', desc: 'Keep practicing!' },
+    { min: 4,  max: 6,   label: 'Average',     emoji: '✌️', color: '#eab308', desc: 'Solid score for casual play.' },
+    { min: 6,  max: 8,   label: 'Fast',        emoji: '⚡', color: '#22c55e', desc: "Good for Minecraft PvP!" },
+    { min: 8,  max: 10,  label: 'Insane',      emoji: '🔥', color: '#3b82f6', desc: "Competitive Minecraft level!" },
+    { min: 10, max: 14,  label: 'Godlike',     emoji: '🚀', color: '#a855f7', desc: "Elite Minecraft PvP player!" },
+    { min: 14, max: 999, label: 'World Class', emoji: '👑', color: '#f59e0b', desc: 'Legendary clicking speed!' },
+  ];
+  function getRating(cps) { return RATINGS.find(r => cps >= r.min && cps < r.max) || RATINGS[RATINGS.length - 1]; }
+
+  let state = { clicks: 0, isRunning: false, mode: 'time', timeLimit: 5, startTime: null, elapsed: 0, timer: null, history: [], scores: [], bestCPS: 0 };
+
+  const clickArea = document.getElementById('click-area');
+  const cpsDisplay = document.getElementById('cps-display');
+  const clickCountEl = document.getElementById('click-count');
+  const timerDisplay = document.getElementById('timer-display');
+  const statusText = document.getElementById('status-text');
+  const bestScoreEl = document.getElementById('best-score');
+  const overlayCount = document.getElementById('overlay-count');
+  const scoresList = document.getElementById('scores-list');
+  const resultOverlay = document.getElementById('result-overlay');
+
+  const canvas = document.getElementById('click-graph');
+  let ctx = null;
+  function initCanvas() {
+    if (!canvas) return;
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.parentElement.getBoundingClientRect();
+    canvas.width = rect.width * dpr; canvas.height = 80 * dpr;
+    canvas.style.width = rect.width + 'px'; canvas.style.height = '80px';
+    ctx = canvas.getContext('2d'); ctx.scale(dpr, dpr);
+  }
+  initCanvas(); window.addEventListener('resize', initCanvas);
+
+  function drawGraph() {
+    if (!ctx || state.history.length < 2) return;
+    const W = canvas.offsetWidth, H = canvas.offsetHeight;
+    ctx.clearRect(0, 0, W, H);
+    const maxCPS = Math.max(...state.history.map(p => p.cps), 6);
+    const maxT = state.mode === 'time' ? state.timeLimit : Math.max(state.elapsed, 1);
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)'; ctx.lineWidth = 1;
+    for (let i = 1; i < 4; i++) { const y = (i/4)*H; ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(W,y); ctx.stroke(); }
+    const pts = state.history.map(p => ({ x: (p.t/maxT)*W, y: H-(p.cps/maxCPS)*H*0.85 }));
+    ctx.beginPath(); ctx.strokeStyle = '#00ff87'; ctx.lineWidth = 2; ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+    pts.forEach((p, i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y)); ctx.stroke();
+    ctx.lineTo(pts[pts.length-1].x, H); ctx.lineTo(0, H); ctx.closePath(); ctx.fillStyle = 'rgba(0,255,135,0.08)'; ctx.fill();
+  }
+  function clearGraph() { if(ctx) ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight); }
+
+  function loadScores() {
+    try { const raw = localStorage.getItem(STORAGE_KEY); state.scores = raw ? JSON.parse(raw) : []; state.bestCPS = state.scores.length ? Math.max(...state.scores.map(s => s.cps)) : 0; } catch(e) { state.scores = []; }
+  }
+  function saveScore(cps, clicks, elapsed) {
+    const e2 = { cps: parseFloat(cps.toFixed(2)), clicks, elapsed: parseFloat(elapsed.toFixed(2)), mode: `${state.timeLimit}s`, date: new Date().toLocaleDateString() };
+    state.scores.unshift(e2); state.scores = state.scores.slice(0,20);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state.scores));
+    if (cps > state.bestCPS) state.bestCPS = cps;
+  }
+  function renderScores() {
+    if (!scoresList) return;
+    if (!state.scores.length) { scoresList.innerHTML = '<p class="history-empty">No scores yet!</p>'; return; }
+    scoresList.innerHTML = state.scores.slice(0,8).map((s,i) => `<div class="history-row"><span style="color:var(--muted);font-size:0.8rem;">#${i+1}</span><span class="history-cps">${s.cps} CPS</span><span class="history-meta">${s.clicks} clicks · ${s.mode}</span><span class="history-meta">${s.date}</span></div>`).join('');
+  }
+  function updateBestDisplay() { if(bestScoreEl) bestScoreEl.textContent = state.bestCPS > 0 ? state.bestCPS.toFixed(2) : '--'; }
+
+  function createRipple(e) {
+    if (!clickArea) return;
+    const rect = clickArea.getBoundingClientRect();
+    const x = (e?.clientX ?? e?.changedTouches?.[0]?.clientX ?? rect.left+rect.width/2) - rect.left;
+    const y = (e?.clientY ?? e?.changedTouches?.[0]?.clientY ?? rect.top+rect.height/2) - rect.top;
+    const r = document.createElement('div'); r.className = 'ripple-effect';
+    r.style.left = x+'px'; r.style.top = y+'px'; clickArea.appendChild(r); setTimeout(()=>r.remove(),500);
+  }
+
+  function handleClick(e) {
+    if (!state.isRunning) startTest();
+    state.clicks++;
+    if(clickCountEl) clickCountEl.textContent = state.clicks;
+    if(overlayCount) overlayCount.textContent = state.clicks;
+    createRipple(e);
+  }
+
+  function startTest() {
+    state.isRunning = true; state.startTime = Date.now(); state.clicks = 0; state.history = [];
+    clickArea?.classList.add('active');
+    if(statusText) statusText.textContent = 'GO! Click as fast as you can!';
+    if(overlayCount) { overlayCount.style.opacity='1'; overlayCount.textContent='0'; }
+    clearGraph();
+    state.timer = setInterval(() => {
+      const elapsed = (Date.now()-state.startTime)/1000; state.elapsed = elapsed;
+      const rem = Math.max(0, state.timeLimit-elapsed);
+      if(timerDisplay) timerDisplay.textContent = rem.toFixed(1);
+      if(elapsed >= state.timeLimit) { endTest(); return; }
+      const cps = elapsed > 0 ? state.clicks/elapsed : 0;
+      if(cpsDisplay) cpsDisplay.textContent = cps.toFixed(2);
+      state.history.push({t:elapsed, cps}); drawGraph();
+    }, 50);
+  }
+
+  function endTest() {
+    clearInterval(state.timer); state.isRunning = false; clickArea?.classList.remove('active');
+    const elapsed = state.elapsed || 0.01; const cps = state.clicks/elapsed; const rating = getRating(cps);
+    const wasNewBest = cps > state.bestCPS; saveScore(cps, state.clicks, elapsed); renderScores(); updateBestDisplay();
+    document.getElementById('result-cps').textContent = cps.toFixed(2);
+    document.getElementById('result-clicks').textContent = state.clicks;
+    document.getElementById('result-time').textContent = elapsed.toFixed(2)+'s';
+    document.getElementById('result-best').textContent = state.bestCPS.toFixed(2);
+    const rEl = document.getElementById('result-rating'); rEl.textContent = rating.emoji+' '+rating.label; rEl.style.color = rating.color;
+    document.getElementById('result-desc').textContent = rating.desc;
+    document.getElementById('new-best-badge').classList.toggle('hidden', !wasNewBest);
+    if(resultOverlay) { resultOverlay.style.display='flex'; resultOverlay.classList.add('visible'); }
+  }
+
+  function reset() {
+    clearInterval(state.timer); state.isRunning = false; state.clicks = 0; state.history = []; state.elapsed = 0;
+    clickArea?.classList.remove('active');
+    if(cpsDisplay) cpsDisplay.textContent = '0.00'; if(clickCountEl) clickCountEl.textContent = '0';
+    if(overlayCount) { overlayCount.style.opacity='0'; overlayCount.textContent='0'; }
+    if(timerDisplay) timerDisplay.textContent = state.timeLimit.toFixed(1);
+    if(statusText) statusText.textContent = 'Click the box to begin your Kohi CPS test!';
+    clearGraph(); updateBestDisplay();
+  }
+
+  document.querySelectorAll('.mode-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if(state.isRunning) return;
+      document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
+      state.mode = 'time'; state.timeLimit = parseInt(btn.dataset.mode); reset();
+    });
+  });
+
+  clickArea?.addEventListener('click', handleClick);
+  clickArea?.addEventListener('touchstart', (e) => { e.preventDefault(); handleClick(e); }, {passive:false});
+  clickArea?.addEventListener('contextmenu', (e) => e.preventDefault());
+
+  document.getElementById('try-again-btn')?.addEventListener('click', () => {
+    if(resultOverlay) { resultOverlay.style.display='none'; resultOverlay.classList.remove('visible'); } reset();
+  });
+  document.getElementById('share-btn')?.addEventListener('click', () => {
+    const cps = document.getElementById('result-cps')?.textContent;
+    const text = `I scored ${cps} CPS on the Kohi Click Test at FastClickTest.com! ⚔️`;
+    navigator.share ? navigator.share({title:'Kohi CPS Score',text,url:window.location.href}) : navigator.clipboard.writeText(text);
+  });
+  document.querySelectorAll('.faq-item').forEach(item => { item.querySelector('.faq-q')?.addEventListener('click', () => item.classList.toggle('open')); });
+  resultOverlay?.addEventListener('click', (e) => { if(e.target===resultOverlay){resultOverlay.style.display='none';resultOverlay.classList.remove('visible');reset();} });
+
+  loadScores(); updateBestDisplay(); renderScores();
+</script>
