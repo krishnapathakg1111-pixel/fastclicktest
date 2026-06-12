@@ -148,4 +148,176 @@ area?.addEventListener('click', ()=>{
     setStatus('Click the box to start — wait for GREEN then click as fast as you can');
   }
 });
+</script>  <section class="seo-content">
+    <h2>Reaction Time Test — What Is a Good Reaction Time?</h2>
+    <p>Reaction time is the time between a stimulus occurring and your response to it. In gaming, reaction time typically refers to <strong>visual reaction time</strong> — how quickly you respond to something appearing on screen. This is distinct from decision-making time, which adds cognitive processing on top of pure reaction speed.</p>
+    <p>Human visual reaction time averages around <strong>200–250 milliseconds</strong> for simple stimuli. Trained gamers and athletes often test at 150–200ms. Elite professional players and athletes have been recorded at 120–150ms in controlled test conditions, though performance varies significantly based on fatigue, caffeine, and practice state.</p>
+
+    <h3>How the Reaction Time Test Works</h3>
+    <p>Wait for the screen to turn green, then click as fast as you can. The test measures the time between the color change and your click in milliseconds. Multiple trials are averaged to give you a reliable baseline — a single test can vary by 50ms or more due to natural variation in attention and anticipation timing.</p>
+    <p>Try to avoid anticipating the color change — if you click before it happens, the test will register a false start. The most accurate results come from relaxed, focused attempts where you're genuinely reacting to the stimulus rather than guessing when it will appear.</p>
+
+    <h3>What Affects Your Reaction Time?</h3>
+    <p><strong>Fatigue</strong> is the biggest factor — tired players react 50–100ms slower than rested ones. <strong>Caffeine</strong> modestly improves reaction time for most people (about 10–20ms). <strong>Practice</strong> trains your visual processing pathways, gradually reducing your average reaction time. <strong>Monitor refresh rate</strong> affects when you visually perceive the stimulus — a 144Hz monitor shows changes up to 7ms sooner than a 60Hz monitor at the same frame.</p>
+    <p><strong>Input lag</strong> from your mouse and computer also adds to the measured time. Wired gaming mice with low polling rates (1000Hz+) reduce input lag compared to wireless mice or standard office equipment. For the most accurate personal benchmarks, use the same hardware consistently.</p>
+
+    <h3>Reaction Time and Gaming Performance</h3>
+    <p>In first-person shooters, reaction time determines how quickly you can respond to an enemy appearing. In <strong>Minecraft PvP</strong>, it affects how quickly you start clicking after a hit opportunity opens. In fighting games, it determines whether you can block incoming attacks in time. In rhythm games, it's the foundation of your timing accuracy.</p>
+    <p>However, raw reaction time is only one component of gaming skill. Game sense, positioning, aim, and decision-making often matter more than raw reaction speed. A player with 180ms reaction time and excellent game sense will usually outperform a player with 140ms reaction time and poor positioning.</p>
+
+    <h3>How to Improve Reaction Time</h3>
+    <p>Reaction time is trainable but has genetic limits. Consistent daily practice with reaction tests like this one shows measurable improvement for most people over 4–8 weeks. Adequate sleep (7–9 hours) is the single biggest factor within your control — sleep deprivation is devastating to reaction speed. Regular aerobic exercise has also been shown to improve cognitive processing speed, including reaction time.</p>
+    <p>Gaming-specific reaction training using aim trainers like Aim Lab or KovaaK's can also improve your gaming reaction time in a more sport-specific context than a simple click test.</p>
+
+    <h3>Compare All Your Speed Metrics</h3>
+    <p>Use our full suite of tests to build a complete picture of your gaming speed: <a href="/">CPS click speed test</a>, <a href="/spacebar-test">spacebar speed test</a>, <a href="/jitter-click-test">jitter click test</a>, and <a href="/butterfly-click-test">butterfly click test</a>. Together these tests reveal your strengths and identify specific areas for targeted improvement.</p>
+  </section>t Layout from '../layouts/Layout.astro';
+---
+<Layout
+  title="Reaction Time Test — How Fast Are Your Reflexes? | FastClickTest.com"
+  description="Free reaction time test. Measure your reflex speed in milliseconds — click when the screen turns green. Compare your score to the world average."
+  currentPage="reaction"
+>
+<div class="page">
+  <div class="page-hero">
+    <h1>Reaction <span class="hi">Time Test</span></h1>
+    <p>How fast are your reflexes? Wait for green — click as fast as you can. Reaction time measured in milliseconds.</p>
+  </div>
+
+  <div class="stats-row" style="margin-bottom:16px">
+    <div class="stat">
+      <div class="stat-val" id="r-last">--</div>
+      <div class="stat-lbl">Last (ms)</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="r-best">--</div>
+      <div class="stat-lbl">Best (ms)</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val" id="r-avg">--</div>
+      <div class="stat-lbl">Average (ms)</div>
+    </div>
+  </div>
+
+  <div class="reaction-area wait" id="reaction-area">
+    Click to Begin
+  </div>
+  <p id="r-status" style="text-align:center;color:var(--text-2);font-size:0.8rem;font-family:var(--font-game);letter-spacing:0.06em;margin-bottom:20px;">
+    Click the box to start — wait for GREEN then click as fast as you can
+  </p>
+
+  <div class="history-section">
+    <div class="section-label">Results This Session</div>
+    <div id="r-history"><p class="history-empty">No results yet!</p></div>
+  </div>
+
+  <div class="seo-content">
+    <h2>Reaction Time Test</h2>
+    <p>Your <strong>reaction time</strong> is how long it takes you to respond to a visual stimulus — in this case, the screen turning from red to green. It's measured in milliseconds (ms). The average human reaction time to a visual stimulus is around <strong>200–250ms</strong>. Elite gamers and athletes typically react in <strong>150–200ms</strong>.</p>
+    <h3>What is a Good Reaction Time?</h3>
+    <p><strong>Under 150ms</strong> — Exceptional (top athletes, pro gamers). <strong>150–200ms</strong> — Excellent, elite gamer level. <strong>200–250ms</strong> — Good, above average. <strong>250–300ms</strong> — Average for most adults. <strong>300–400ms</strong> — Below average, room to improve. <strong>Over 400ms</strong> — Slow, may indicate fatigue or distraction.</p>
+    <h3>How to Improve Reaction Time</h3>
+    <p>Take multiple tests in a session — your first result is often slower as your brain warms up. Practice regularly using games that require fast reflexes. Get adequate sleep (reaction time degrades significantly with fatigue). Stay hydrated. The biggest gains come from consistent practice over weeks, not single sessions.</p>
+    <h3>Reaction Time and Gaming</h3>
+    <p>In competitive FPS games (Valorant, CS2, Apex Legends), reaction time directly impacts your ability to respond to enemies. Combined with high CPS, a fast reaction time gives you a genuine edge. Use this test alongside our <a href="/">click speed test</a> to build a complete picture of your gaming performance metrics.</p>
+  </div>
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+    {"@type":"Question","name":"What is a good reaction time?","acceptedAnswer":{"@type":"Answer","text":"The average human reaction time is 200-250ms. Elite gamers react in 150-200ms. Under 150ms is exceptional."}},
+    {"@type":"Question","name":"How can I improve my reaction time?","acceptedAnswer":{"@type":"Answer","text":"Practice regularly, get adequate sleep, stay hydrated, and take multiple tests per session as your brain warms up over time."}}
+  ]}
+  </script>
+</div>
+</Layout>
+
+<script>
+const area = document.getElementById('reaction-area');
+const rLast=$('r-last'), rBest=$('r-best'), rAvg=$('r-avg');
+const rStatus=$('r-status'), rHistory=$('r-history');
+function $(id){return document.getElementById(id);}
+
+const RATINGS=[
+  {max:150, label:'🚀 Superhuman',  color:'#fbbf24'},
+  {max:200, label:'⚡ Elite Gamer', color:'#c084fc'},
+  {max:250, label:'🎯 Excellent',   color:'#4ade80'},
+  {max:300, label:'✌️ Average',     color:'#facc15'},
+  {max:400, label:'🐢 Below Avg',   color:'#fb923c'},
+  {max:9999,label:'😴 Slow',        color:'#f87171'},
+];
+const getRating = ms => RATINGS.find(r => ms < r.max);
+
+let state='idle', gotoTimer=null, startTime=null;
+let results=[], best=null;
+
+function renderHistory(){
+  if(!rHistory)return;
+  if(!results.length){rHistory.innerHTML='<p class="history-empty">No results yet!</p>';return;}
+  rHistory.innerHTML=results.slice(0,8).map((r,i)=>`
+    <div class="history-row">
+      <span class="history-rank">#${i+1}</span>
+      <span class="history-cps">${r.ms}ms</span>
+      <span class="history-meta" style="color:${r.color}">${r.label}</span>
+    </div>`).join('');
+}
+
+function setStatus(txt){ if(rStatus)rStatus.textContent=txt; }
+
+area?.addEventListener('click', ()=>{
+  if(state==='idle'){
+    state='waiting';
+    area.className='reaction-area ready';
+    area.textContent='Wait for green...';
+    setStatus('Don\'t click yet — wait for the screen to turn GREEN');
+    const delay = 1500 + Math.random()*3000;
+    gotoTimer = setTimeout(()=>{
+      state='go'; startTime=Date.now();
+      area.className='reaction-area go';
+      area.textContent='CLICK NOW!';
+      setStatus('CLICK! CLICK! CLICK!');
+    }, delay);
+    return;
+  }
+
+  if(state==='waiting'){
+    // clicked too early
+    clearTimeout(gotoTimer);
+    state='idle';
+    area.className='reaction-area wait';
+    area.textContent='Too Early! Click to Try Again';
+    setStatus('You clicked too early — wait for GREEN next time');
+    return;
+  }
+
+  if(state==='go'){
+    const ms = Date.now() - startTime;
+    state='result';
+    const rating = getRating(ms);
+    if(!best||ms<best)best=ms;
+    const avg = results.length ? Math.round([...results.map(r=>r.ms),ms].reduce((a,b)=>a+b,0)/(results.length+1)) : ms;
+    results.unshift({ms,label:rating.label,color:rating.color});
+
+    if(rLast) rLast.textContent=ms+'ms';
+    if(rBest) rBest.textContent=best+'ms';
+    if(rAvg)  rAvg.textContent=avg+'ms';
+    renderHistory();
+
+    area.className='reaction-area result';
+    area.innerHTML=`<div style="text-align:center">
+      <div style="font-family:var(--font-mono);font-size:2.5rem;font-weight:700;color:var(--cyan);text-shadow:0 0 30px var(--cyan-glow)">${ms}ms</div>
+      <div style="font-size:1rem;font-weight:800;color:${rating.color};margin:6px 0">${rating.label}</div>
+      <div style="font-size:0.78rem;color:var(--text-2)">Click to try again</div>
+    </div>`;
+    setStatus(`${ms}ms reaction time — click to test again`);
+    setTimeout(()=>{ state='idle'; },600);
+    return;
+  }
+
+  if(state==='result'){
+    state='idle';
+    area.className='reaction-area wait';
+    area.textContent='Click to Begin';
+    setStatus('Click the box to start — wait for GREEN then click as fast as you can');
+  }
+});
 </script>

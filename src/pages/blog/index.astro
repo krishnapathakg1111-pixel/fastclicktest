@@ -1,0 +1,25 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const articles = [
+  { slug:'how-to-improve-cps', title:'How to Improve Your CPS — 7 Proven Methods', desc:'From mouse choice to technique training, these 7 methods will boost your clicks per second.', time:'6 min' },
+  { slug:'jitter-clicking-guide', title:'Complete Jitter Clicking Guide for Beginners', desc:'Everything you need to know about jitter clicking — what it is, how to do it, and whether it\'s right for you.', time:'7 min' },
+  { slug:'best-cps-for-minecraft', title:'What CPS Do You Need for Minecraft PvP?', desc:'The exact CPS thresholds for different Minecraft PvP modes and how to reach them.', time:'5 min' },
+  { slug:'butterfly-vs-jitter', title:'Butterfly Clicking vs Jitter Clicking — Which is Better?', desc:'A complete comparison of the two most popular high-CPS techniques. Which should you learn first?', time:'6 min' },
+];
+---
+<Layout title="Click Speed Blog — Tips, Guides & CPS Improvement | FastClickTest.com" description="Free guides on improving click speed, mastering jitter and butterfly clicking, and optimizing your setup for competitive gaming." currentPage="blog">
+  <section class="page-hero">
+    <h1>Click Speed <em style="color:var(--accent)">Blog</em></h1>
+    <p>Guides, tips and techniques to improve your CPS and clicking skills.</p>
+  </section>
+  <div style="max-width:720px;margin:0 auto;padding:0 20px 80px;display:flex;flex-direction:column;gap:16px;">
+    {articles.map(a => (
+      <a href={`/blog/${a.slug}`} style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:24px;text-decoration:none;color:var(--text);transition:all 0.2s;display:block;">
+        <div style="font-size:0.75rem;color:var(--muted);margin-bottom:8px;">⏱️ {a.time} read</div>
+        <div style="font-size:1.1rem;font-weight:700;color:var(--accent);margin-bottom:8px;">{a.title}</div>
+        <div style="font-size:0.88rem;color:var(--muted);line-height:1.6;">{a.desc}</div>
+        <div style="font-size:0.8rem;color:var(--accent);margin-top:12px;">Read article →</div>
+      </a>
+    ))}
+  </div>
+</Layout>

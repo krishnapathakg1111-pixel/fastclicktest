@@ -13,4 +13,9 @@
   <url><loc>https://fastclicktest.com/terms</loc><changefreq>yearly</changefreq><priority>0.3</priority></url>
   <url><loc>https://fastclicktest.com/contact</loc><changefreq>yearly</changefreq><priority>0.4</priority></url>
   <url><loc>https://fastclicktest.com/reaction-time-test</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://fastclicktest.com/blog</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://fastclicktest.com/blog/how-to-improve-cps</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://fastclicktest.com/blog/jitter-clicking-guide</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://fastclicktest.com/blog/best-cps-for-minecraft</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://fastclicktest.com/blog/butterfly-vs-jitter</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
 </urlset>
